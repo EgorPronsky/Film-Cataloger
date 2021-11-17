@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="FilmCataloger.MainWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ContentControl x:Name="ContentControl">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Button Grid.Row="1" Content="Add new" Margin="30px 10px" Click="AddNewFilm_Button"/>
+            
+            <ListBox Grid.Row="0" x:Name="FilmList" Margin="30px 10px" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="5*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Image Grid.Column="0" Width="325" Height="500" Source="{Binding Path=PosterImagePath}" />
+                            
+                            <Grid Grid.Column="1" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="6*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Style="{StaticResource FilmName}" Text="{Binding Path=Name}"/>
+                                
+                                <Button Grid.Row="0" Height="30" Width="30" HorizontalAlignment="Right">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="Resources/Images/Film.png"/>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <StackPanel Margin="5">
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="releaseYearKey" Text="Release year"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="countryKey" Text="Country"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="genreKey" Text="Genre"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="directorKey" Text="Director"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="writerKey" Text="Writer"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="producerKey" Text="Producer"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="composerKey" Text="Composer"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="budgetKey" Text="Budget"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="ageLimitKey" Text="Age limit"/>
+                                        <TextBlock Style="{StaticResource FilmFieldKey}" Name="durationKey" Text="Duration"/>
+                                    </StackPanel>
+                                    
+                                    <StackPanel Grid.Column="1" Margin="5">
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="releaseYearValue" Text="{Binding Path=ReleaseYear}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="countryValue" Text="{Binding Path=Country}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="genreValue" Text="{Binding Path=Genres}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="directorValue" Text="{Binding Path=Directors}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="writerValue" Text="{Binding Path=Writers}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="producerValue" Text="{Binding Path=Producers}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="composerValue" Text="{Binding Path=Composers}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValue" Text="{Binding Path=BudgetInDollars}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="ageLimitValue" Text="{Binding Path=AgeLimit}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="durationValue" Text="{Binding Path=DurationInSeconds}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Directors}" Value="{x:Null}">
+                                <Setter TargetName="directorKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="directorValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AgeLimit}" Value="0">
+                                <Setter TargetName="ageLimitKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="ageLimitValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding DurationInSeconds}" Value="0">
+                                <Setter TargetName="durationKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="durationValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </ContentControl>
+</UserControl>
