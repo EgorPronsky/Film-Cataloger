@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="FilmCataloger.MainWindow"
+﻿<UserControl x:Class="FilmCataloger.ViewModel.MainWindowViewModel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,23 +7,49 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <ContentControl x:Name="ContentControl">
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             
-            <Button Grid.Row="1" Content="Add new" Margin="30px 10px" Click="AddNewFilm_Button"/>
+            <StackPanel Grid.Column="1" Margin="10px">
+                <Button Height="60px" Width="60px" HorizontalAlignment="Center" Cursor="Hand" Click="AddFilmButton_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="../Resources/Images/Add.png"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
             
-            <ListBox Grid.Row="0" x:Name="FilmList" Margin="30px 10px" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox HorizontalContentAlignment="Stretch" Grid.Column="0" x:Name="FilmList" Margin="20px 10px 0px 10px" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="5*"></ColumnDefinition>
+                                <ColumnDefinition Width="0.25*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             
                             <Image Grid.Column="0" Width="325" Height="500" Source="{Binding Path=PosterImagePath}" />
+                            
+                            <StackPanel Grid.Column="2" Margin="5px" Orientation="Horizontal">
+                                <Button Tag="{Binding Path=Id}" Style="{StaticResource FilmItemButton}" Click="EditFilmButton_OnClick">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../Resources/Images/Edit.png"/>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                                <Button Tag="{Binding Path=Id}" Style="{StaticResource FilmItemButton}" Click="RemoveFilmButton_OnClick">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <Image Source="../Resources/Images/Remove.png"/>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
                             
                             <Grid Grid.Column="1" Margin="5">
                                 <Grid.RowDefinitions>
@@ -32,14 +58,6 @@
                                 </Grid.RowDefinitions>
                                 
                                 <TextBlock Style="{StaticResource FilmName}" Text="{Binding Path=Name}"/>
-                                
-                                <Button Grid.Row="0" Height="30" Width="30" HorizontalAlignment="Right">
-                                    <Button.Template>
-                                        <ControlTemplate>
-                                            <Image Source="Resources/Images/Film.png"/>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
                                 
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
@@ -68,9 +86,9 @@
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="writerValue" Text="{Binding Path=Writers}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="producerValue" Text="{Binding Path=Producers}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="composerValue" Text="{Binding Path=Composers}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValue" Text="{Binding Path=BudgetInDollars}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValue" Text="{Binding Path=Budget}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="ageLimitValue" Text="{Binding Path=AgeLimit}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="durationValue" Text="{Binding Path=DurationInSeconds}"/>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="durationValue" Text="{Binding Path=Duration}"/>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
@@ -81,11 +99,27 @@
                                 <Setter TargetName="directorKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="directorValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding AgeLimit}" Value="0">
+                            <DataTrigger Binding="{Binding Writers}" Value="{x:Null}">
+                                <Setter TargetName="writerKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="writerValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Producers}" Value="{x:Null}">
+                                <Setter TargetName="producerKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="producerValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Composers}" Value="{x:Null}">
+                                <Setter TargetName="composerKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="composerValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Budget}" Value="{x:Null}">
+                                <Setter TargetName="budgetKey" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="budgetValue" Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AgeLimit}" Value="{x:Null}">
                                 <Setter TargetName="ageLimitKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="ageLimitValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding DurationInSeconds}" Value="0">
+                            <DataTrigger Binding="{Binding Duration}" Value="{x:Null}">
                                 <Setter TargetName="durationKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="durationValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>

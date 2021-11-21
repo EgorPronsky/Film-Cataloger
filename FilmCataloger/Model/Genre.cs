@@ -1,4 +1,4 @@
-﻿namespace FilmCataloger.domain
+﻿namespace FilmCataloger.Model
 {
     public enum Genre
     {

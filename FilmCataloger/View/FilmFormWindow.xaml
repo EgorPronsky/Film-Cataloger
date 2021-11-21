@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="FilmCataloger.ViewModel.FilmFormViewModel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <ContentControl x:Name="ContentControl">
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}">
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Name</TextBlock>
+                <TextBox Width="600px" Height="35px"></TextBox>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource FilmFormFieldContainer}">
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Release year</TextBlock>
+                <TextBox Width="250px" Height="35px"></TextBox>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource FilmFormFieldContainer}">
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Country</TextBlock>
+                <TextBox Width="250px" Height="35px"></TextBox>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}">
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Genres</TextBlock>
+                <StackPanel x:Name="stackPanel1" Orientation="Horizontal">
+                    <CheckBox x:Name="Action" Height="20" Content="Action" />
+                    <CheckBox x:Name="Comedy" Height="20" Content="Comedy" />
+                    <CheckBox x:Name="Drama" Height="20" Content="Drama" />
+                    <CheckBox x:Name="Fantasy" Height="20" Content="Fantasy" />
+                </StackPanel>
+                <StackPanel x:Name="stackPanel2" Orientation="Horizontal">
+                    <CheckBox x:Name="Horror"  Height="20" Content="Horror" />
+                    <CheckBox x:Name="Mystery" Height="20" Content="Mystery"/>
+                    <CheckBox x:Name="Romance" Height="20" Content="Romance" />
+                    <CheckBox x:Name="Thriller" Height="20" Content="Thriller" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ContentControl>
+</UserControl>

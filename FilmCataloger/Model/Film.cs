@@ -1,7 +1,9 @@
-﻿namespace FilmCataloger.domain
+﻿namespace FilmCataloger.Model
 {
     public class Film
     {
+        private long _id;
+    
         private string _name;
         private ushort _releaseYear;
         private string _country;
@@ -18,7 +20,8 @@
 
         private string _posterImagePath;
 
-        public Film(string name, 
+        public Film(long id,
+            string name, 
             ushort releaseYear, 
             string country, 
             Genre[] genres, 
@@ -31,6 +34,7 @@
             ushort durationInSeconds,
             string posterImagePath)
         {
+            Id = id;
             Name = name;
             ReleaseYear = releaseYear;
             Country = country;
@@ -45,6 +49,12 @@
             PosterImagePath = posterImagePath;
         }
 
+        public long Id
+        {
+            get => _id;
+            set => _id = value;
+        }
+        
         public string Name
         {
             get => _name;

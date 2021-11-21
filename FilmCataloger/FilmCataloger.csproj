@@ -20,7 +20,16 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
       <None Remove="Resources\Images\Trash-can.png" />
-      <Resource Include="Resources\Images\Trash-can.png">
+      <None Remove="Resources\Images\Add.png" />
+      <Resource Include="Resources\Images\Add.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Images\Remove.png" />
+      <Resource Include="Resources\Images\Remove.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Images\Edit.png" />
+      <Resource Include="Resources\Images\Edit.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
     </ItemGroup>

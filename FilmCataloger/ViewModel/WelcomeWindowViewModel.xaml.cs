@@ -1,18 +1,18 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace FilmCataloger
+namespace FilmCataloger.ViewModel
 {
-    public partial class WelcomeWindow : UserControl
+    public partial class WelcomeWindowViewModel : UserControl
     {
-        public WelcomeWindow()
+        public WelcomeWindowViewModel()
         {
             InitializeComponent();
         }
         
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
-            this.ContentControl.Content = new MainWindow();
+            this.ContentControl.Content = new MainWindowViewModel();
         }
     }
 }
