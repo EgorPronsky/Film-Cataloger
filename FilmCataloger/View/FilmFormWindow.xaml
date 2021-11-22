@@ -6,8 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <ContentControl x:Name="ContentControl">
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -22,35 +23,147 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}">
-                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Name</TextBlock>
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Name *</TextBlock>
                 <TextBox Width="600px" Height="35px"></TextBox>
             </StackPanel>
             
             <StackPanel Grid.Row="1" Grid.Column="0" Style="{StaticResource FilmFormFieldContainer}">
-                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Release year</TextBlock>
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Release year *</TextBlock>
                 <TextBox Width="250px" Height="35px"></TextBox>
             </StackPanel>
             
             <StackPanel Grid.Row="1" Grid.Column="1" Style="{StaticResource FilmFormFieldContainer}">
-                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Country</TextBlock>
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Country *</TextBlock>
                 <TextBox Width="250px" Height="35px"></TextBox>
             </StackPanel>
             
-            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}">
-                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Genres</TextBlock>
+            <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}" Margin="0 20px 0 0">
+                <TextBlock Padding="40px 0 0 0" Style="{StaticResource FilmFormFieldLabel}">Genres *</TextBlock>
                 <StackPanel x:Name="stackPanel1" Orientation="Horizontal">
-                    <CheckBox x:Name="Action" Height="20" Content="Action" />
-                    <CheckBox x:Name="Comedy" Height="20" Content="Comedy" />
-                    <CheckBox x:Name="Drama" Height="20" Content="Drama" />
-                    <CheckBox x:Name="Fantasy" Height="20" Content="Fantasy" />
+                    <CheckBox x:Name="Action" Style="{StaticResource FilmFormCheckbox}" Content="Action" />
+                    <CheckBox x:Name="Comedy" Style="{StaticResource FilmFormCheckbox}" Content="Comedy" />
+                    <CheckBox x:Name="Drama" Style="{StaticResource FilmFormCheckbox}" Content="Drama" />
+                    <CheckBox x:Name="Fantasy" Style="{StaticResource FilmFormCheckbox}" Content="Fantasy" />
                 </StackPanel>
                 <StackPanel x:Name="stackPanel2" Orientation="Horizontal">
-                    <CheckBox x:Name="Horror"  Height="20" Content="Horror" />
-                    <CheckBox x:Name="Mystery" Height="20" Content="Mystery"/>
-                    <CheckBox x:Name="Romance" Height="20" Content="Romance" />
-                    <CheckBox x:Name="Thriller" Height="20" Content="Thriller" />
+                    <CheckBox x:Name="Horror" Style="{StaticResource FilmFormCheckbox}"  Content="Horror" />
+                    <CheckBox x:Name="Mystery" Style="{StaticResource FilmFormCheckbox}" Content="Mystery"/>
+                    <CheckBox x:Name="Thriller" Style="{StaticResource FilmFormCheckbox}" Content="Thriller" />
+                    <CheckBox x:Name="Romance" Style="{StaticResource FilmFormCheckbox}" Content="Romance" />
                 </StackPanel>
             </StackPanel>
+            
+            <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Style="{StaticResource FilmFormFieldContainer}">
+                <StackPanel Margin="20px 0">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Age limit(min)</TextBlock>
+                    <TextBox Width="170px" Height="35px"></TextBox>
+                </StackPanel>
+
+                <StackPanel Margin="20px 0">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Budget($)</TextBlock>
+                    <TextBox Width="170px" Height="35px"></TextBox>
+                </StackPanel>
+                
+                <StackPanel Margin="20px 0">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Duration</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="22px" VerticalAlignment="Center">HH</TextBlock>
+                        <TextBox Width="30px" Height="35px"></TextBox>
+                        <TextBlock FontSize="22px" VerticalAlignment="Center">MM</TextBlock>
+                        <TextBox Width="30px" Height="35px"></TextBox>
+                        <TextBlock FontSize="22px" VerticalAlignment="Center">SS</TextBlock>
+                        <TextBox Width="30px" Height="35px"></TextBox>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}">
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Image path</TextBlock>
+                <TextBox Width="600px" Height="35px"></TextBox>
+            </StackPanel>
+            
+            <ScrollViewer Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+                <StackPanel x:Name="Directors" Style="{StaticResource FilmFormFieldContainer}">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Directors</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="500" Height="35" Margin="0 0 10px  0"></TextBox>
+                        <Button Height="30px" Width="30px" HorizontalAlignment="Center" Cursor="Hand" Click="AddDirectorTextBox">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="../Resources/Images/Add.png"/>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            
+            <ScrollViewer Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2">
+                <StackPanel x:Name="Writers" Style="{StaticResource FilmFormFieldContainer}">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Writers</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="500" Height="35" Margin="0 0 10px  0"></TextBox>
+                        <Button Height="30px" Width="30px" HorizontalAlignment="Center" Cursor="Hand" Click="AddWriterTextBox">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="../Resources/Images/Add.png"/>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            
+            <ScrollViewer Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
+                <StackPanel x:Name="Producers" Style="{StaticResource FilmFormFieldContainer}">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Producers</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="500" Height="35" Margin="0 0 10px  0"></TextBox>
+                        <Button Height="30px" Width="30px" HorizontalAlignment="Center" Cursor="Hand" Click="AddProducerTextBox">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="../Resources/Images/Add.png"/>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            
+            <ScrollViewer Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2">
+                <StackPanel x:Name="Composers" Style="{StaticResource FilmFormFieldContainer}">
+                    <TextBlock Style="{StaticResource FilmFormFieldLabel}">Composers</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="500" Height="35" Margin="0 0 10px  0"></TextBox>
+                        <Button Height="30px" Width="30px" HorizontalAlignment="Center" Cursor="Hand" Click="AddComposerTextBox">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Image Source="../Resources/Images/Add.png"/>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            
+            <Button 
+                Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
+                x:Name="Save"  
+                Margin="0 30px 30px 0"
+                Content="Save" 
+                Cursor="Hand"
+                Style="{StaticResource FilmFormSaveButton}"
+            />
+            
+            <Button 
+                Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2"
+                x:Name="Cancel"  
+                Margin="30px 30px 0 0"
+                Content="Cancel" 
+                Cursor="Hand"
+                Style="{StaticResource FilmFormCancelButton}"
+            />
+            
         </Grid>
     </ContentControl>
 </UserControl>

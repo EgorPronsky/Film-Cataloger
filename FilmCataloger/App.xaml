@@ -77,7 +77,7 @@
         <Style x:Key="FilmFormFieldContainer">
             <Setter Property="StackPanel.VerticalAlignment" Value="Top"/>
             <Setter Property="StackPanel.HorizontalAlignment" Value="Center"/>
-            <Setter Property="Control.Margin" Value="0 50px 0 0" />
+            <Setter Property="Control.Margin" Value="0 30px 0 0" />
         </Style>
         
         <Style x:Key="FilmFormFieldLabel">
@@ -85,6 +85,49 @@
             <Setter Property="TextBlock.FontSize" Value="26px" />
             <Setter Property="TextBlock.Foreground" Value="#999999" />
             <Setter Property="TextBlock.Margin" Value="0 0 0 5px" />
+        </Style>
+        
+        <Style x:Key="FilmFormCheckbox">
+            <Setter Property="CheckBox.FontFamily" Value="Resources/Fonts/#Manrope" />
+            <Setter Property="CheckBox.FontSize" Value="18px" />
+            <Setter Property="CheckBox.Margin" Value="40px 0" />
+            <Setter Property="CheckBox.Height" Value="40px" />
+        </Style>
+        
+        <Style x:Key="FilmFormSaveButton">
+            <Setter Property="Control.VerticalAlignment" Value="Top" />
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Control.FontFamily" Value="Resources/Fonts/#Manrope" />
+            <Setter Property="Control.FontSize" Value="40px" />
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#5557cc" Offset="0" />
+                            <GradientStop Color="#7854c8" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="FilmFormCancelButton">
+            <Setter Property="Control.VerticalAlignment" Value="Top" />
+            <Setter Property="Control.HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Control.FontFamily" Value="Resources/Fonts/#Manrope" />
+            <Setter Property="Control.FontSize" Value="40px" />
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Background">
+                <Setter.Value>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#7c54c8" Offset="0" />
+                            <GradientStop Color="#ab51c3" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
         </Style>
         
     </Application.Resources>
