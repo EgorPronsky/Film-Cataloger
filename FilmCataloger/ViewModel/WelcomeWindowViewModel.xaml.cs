@@ -12,7 +12,7 @@ namespace FilmCataloger.ViewModel
         
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
-            this.ContentControl.Content = new MainWindowViewModel();
+            ContentControl.Content = new MainWindowViewModel();
         }
     }
 }

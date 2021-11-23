@@ -87,6 +87,13 @@
             <Setter Property="TextBlock.Margin" Value="0 0 0 5px" />
         </Style>
         
+        <Style x:Key="FilmFormFieldTextBox">
+            <Setter Property="TextBox.FontFamily" Value="Resources/Fonts/#Manrope" />
+            <Setter Property="TextBox.FontSize" Value="26px" />
+            <Setter Property="TextBox.VerticalAlignment" Value="Center" />
+            <Setter Property="TextBox.Margin" Value="5px 0 0 0" />
+        </Style>
+        
         <Style x:Key="FilmFormCheckbox">
             <Setter Property="CheckBox.FontFamily" Value="Resources/Fonts/#Manrope" />
             <Setter Property="CheckBox.FontSize" Value="18px" />

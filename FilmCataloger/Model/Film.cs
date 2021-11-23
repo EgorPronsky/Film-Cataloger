@@ -1,18 +1,22 @@
-﻿namespace FilmCataloger.Model
+﻿using System.Collections.Generic;
+
+namespace FilmCataloger.Model
 {
     public class Film
     {
-        private long _id;
+        private static long _filmCounter = 0;
+        
+        private readonly long _id;
     
         private string _name;
         private ushort _releaseYear;
         private string _country;
-        private Genre[] _genres;
+        private List<Genre> _genres;
 
-        private string[] _directors;
-        private string[] _writers;
-        private string[] _producers;
-        private string[] _composers;
+        private List<string> _directors;
+        private List<string> _writers;
+        private List<string> _producers;
+        private List<string> _composers;
 
         private ulong _budgetInDollars;
         private byte _ageLimit;
@@ -20,21 +24,20 @@
 
         private string _posterImagePath;
 
-        public Film(long id,
-            string name, 
+        public Film(string name, 
             ushort releaseYear, 
             string country, 
-            Genre[] genres, 
-            string[] directors, 
-            string[] writers, 
-            string[] producers, 
-            string[] composers, 
+            List<Genre> genres, 
+            List<string> directors, 
+            List<string> writers, 
+            List<string> producers, 
+            List<string> composers, 
             ulong budgetInDollars, 
             byte ageLimit, 
             ushort durationInSeconds,
             string posterImagePath)
         {
-            Id = id;
+            _id = ++_filmCounter;
             Name = name;
             ReleaseYear = releaseYear;
             Country = country;
@@ -52,7 +55,6 @@
         public long Id
         {
             get => _id;
-            set => _id = value;
         }
         
         public string Name
@@ -73,31 +75,31 @@
             set => _country = value;
         }
 
-        public Genre[] Genres
+        public List<Genre> Genres
         {
             get => _genres;
             set => _genres = value;
         }
 
-        public string[] Directors
+        public List<string> Directors
         {
             get => _directors;
             set => _directors = value;
         }
 
-        public string[] Writers
+        public List<string> Writers
         {
             get => _writers;
             set => _writers = value;
         }
 
-        public string[] Producers
+        public List<string> Producers
         {
             get => _producers;
             set => _producers = value;
         }
 
-        public string[] Composers
+        public List<string> Composers
         {
             get => _composers;
             set => _composers = value;
