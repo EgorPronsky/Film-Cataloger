@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FilmCataloger.Model;
 
 namespace FilmCataloger.Adapter
@@ -54,6 +55,17 @@ namespace FilmCataloger.Adapter
                 .ToString(@"hh\:mm\:ss") : null;
 
             PosterImagePath = film.PosterImagePath;
+        }
+        
+        public class DefaultComparer : IComparer<FilmToViewAdapter>
+        {
+            public int Compare(FilmToViewAdapter f1, FilmToViewAdapter f2)
+            {
+                int result = String.Compare(f1.Name, f2.Name, StringComparison.Ordinal);
+                if (result == 0)
+                    result = -(UInt16.Parse(f1.ReleaseYear) - UInt16.Parse(f2.ReleaseYear));
+                return result;
+            }
         }
 
         public long Id

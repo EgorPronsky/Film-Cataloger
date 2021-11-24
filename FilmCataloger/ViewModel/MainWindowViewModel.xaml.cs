@@ -1,104 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
 using FilmCataloger.Adapter;
+using FilmCataloger.Service;
 
 namespace FilmCataloger.ViewModel
 {
     public partial class MainWindowViewModel : UserControl
     {
-        private static ObservableCollection<FilmToViewAdapter> FilmCollection { get; set; }
-        private static long Counter { get; set; }
+        public static ObservableCollection<FilmToViewAdapter> FilmCollection = new ObservableCollection<FilmToViewAdapter>();
 
         public MainWindowViewModel()
         {
             InitializeComponent();
-            FilmCollection = new ObservableCollection<FilmToViewAdapter>
-            {
-                new FilmToViewAdapter(new Film(
-                    "Вечные", 
-                    2021,
-                    "United Kindom",
-                    new List<Genre>(new []{Genre.Action, Genre.Mystery}),
-                    new List<string>(new string[]{"Хлоя Чжао"}),
-                    null,
-                    new List<string>(new string[]{"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                    new List<string>(new string[]{"Рамин Джавади"}),
-                    350000000, 
-                    0, 
-                    16594,
-                    "C:/img/eternals.png")),
-                new FilmToViewAdapter(new Film(
-                    "Вечные", 
-                    2021,
-                    "United Kindom",
-                    new List<Genre>(new []{Genre.Action, Genre.Mystery}),
-                    new List<string>(new string[]{"Хлоя Чжао"}),
-                    null,
-                    new List<string>(new string[]{"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                    new List<string>(new string[]{"Рамин Джавади"}),
-                    350000000, 
-                    0, 
-                    16594,
-                    "C:/img/eternals.png")),
-                new FilmToViewAdapter(new Film(
-                    "Вечные", 
-                    2021,
-                    "United Kindom",
-                    new List<Genre>(new []{Genre.Action, Genre.Mystery}),
-                    new List<string>(new string[]{"Хлоя Чжао"}),
-                    null,
-                    new List<string>(new string[]{"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                    new List<string>(new string[]{"Рамин Джавади"}),
-                    350000000, 
-                    0, 
-                    16594,
-                    "C:/img/eternals.png")),
-                new FilmToViewAdapter(new Film(
-                    "Вечные", 
-                    2021,
-                    "United Kindom",
-                    new List<Genre>(new []{Genre.Action, Genre.Mystery}),
-                    new List<string>(new string[]{"Хлоя Чжао"}),
-                    null,
-                    new List<string>(new string[]{"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                    new List<string>(new string[]{"Рамин Джавади"}),
-                    350000000, 
-                    0, 
-                    16594,
-                    "C:/img/eternals.png")),
-                new FilmToViewAdapter(new Film(
-                    "Вечные", 
-                    2021,
-                    "United Kindom",
-                    new List<Genre>(new []{Genre.Action, Genre.Mystery}),
-                    new List<string>(new string[]{"Хлоя Чжао"}),
-                    null,
-                    new List<string>(new string[]{"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                    new List<string>(new string[]{"Рамин Джавади"}),
-                    350000000, 
-                    0, 
-                    16594,
-                    "C:/img/eternals.png")),
-                new FilmToViewAdapter(new Film(
-                    "Вечные", 
-                    2021,
-                    "United Kindom",
-                    new List<Genre>(new []{Genre.Action, Genre.Mystery}),
-                    new List<string>(new string[]{"Хлоя Чжао"}),
-                    null,
-                    new List<string>(new string[]{"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                    new List<string>(new string[]{"Рамин Джавади"}),
-                    350000000, 
-                    0, 
-                    16594,
-                    "C:/img/eternals.png"))
-            };
 
+            FilmCollectionService.AddSorted(FilmCollection,
+                new FilmToViewAdapter(new Film(
+                    "Вечные",
+                    2020,
+                    "United Kindom",
+                    new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
+                    new List<string>(new string[] {"Хлоя Чжао"}),
+                    null,
+                    new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
+                    new List<string>(new string[] {"Рамин Джавади"}),
+                    350000000,
+                    0,
+                    16594,
+                    "C:/img/eternals.png")),
+                new FilmToViewAdapter.DefaultComparer());
+            
+            FilmCollectionService.AddSorted(FilmCollection,
+                new FilmToViewAdapter(new Film(
+                    "БBечные",
+                    2022,
+                    "United Kindom",
+                    new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
+                    new List<string>(new string[] {"Хлоя Чжао"}),
+                    null,
+                    new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
+                    new List<string>(new string[] {"Рамин Джавади"}),
+                    350000000,
+                    0,
+                    16594,
+                    "C:/img/eternals.png")),
+                new FilmToViewAdapter.DefaultComparer());
+            
+            FilmCollectionService.AddSorted(FilmCollection,
+                new FilmToViewAdapter(new Film(
+                    "ABечные",
+                    2021,
+                    "United Kindom",
+                    new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
+                    new List<string>(new string[] {"Хлоя Чжао"}),
+                    null,
+                    new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
+                    new List<string>(new string[] {"Рамин Джавади"}),
+                    350000000,
+                    0,
+                    16594,
+                    "C:/img/eternals.png")),
+                new FilmToViewAdapter.DefaultComparer());
+            
+            
+            FilmCollectionService.AddSorted(FilmCollection,
+                new FilmToViewAdapter(new Film(
+                    "Вечные",
+                    2021,
+                    "United Kindom",
+                    new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
+                    new List<string>(new string[] {"Хлоя Чжао"}),
+                    null,
+                    new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
+                    new List<string>(new string[] {"Рамин Джавади"}),
+                    350000000,
+                    0,
+                    16594,
+                    "C:/img/eternals.png")),
+                new FilmToViewAdapter.DefaultComparer());
+            
             FilmList.ItemsSource = FilmCollection;
         }
 
