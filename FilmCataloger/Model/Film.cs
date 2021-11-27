@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FilmCataloger.Model
 {
@@ -19,7 +20,7 @@ namespace FilmCataloger.Model
 
         private ulong _budgetInDollars;
         private byte _ageLimit;
-        private ushort _durationInSeconds;
+        private DateTime _duration;
 
         private string _posterImagePath;
 
@@ -33,7 +34,7 @@ namespace FilmCataloger.Model
             List<string> composers, 
             ulong budgetInDollars, 
             byte ageLimit, 
-            ushort durationInSeconds,
+            DateTime duration,
             string posterImagePath)
         {
             _id = ++_filmCounter;
@@ -47,7 +48,7 @@ namespace FilmCataloger.Model
             Composers = composers;
             BudgetInDollars = budgetInDollars;
             AgeLimit = ageLimit;
-            DurationInSeconds = durationInSeconds;
+            Duration = duration;
             PosterImagePath = posterImagePath;
         }
 
@@ -116,10 +117,10 @@ namespace FilmCataloger.Model
             set => _ageLimit = value;
         }
 
-        public ushort DurationInSeconds
+        public DateTime Duration
         {
-            get => _durationInSeconds;
-            set => _durationInSeconds = value;
+            get => _duration;
+            set => _duration = value;
         }
         
         public string PosterImagePath

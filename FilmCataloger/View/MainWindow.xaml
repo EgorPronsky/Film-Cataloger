@@ -59,8 +59,6 @@
                                 
                                 <TextBlock Style="{StaticResource FilmName}" Text="{Binding Path=Name}"/>
                                 
-                                
-                                
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -83,7 +81,13 @@
                                     <StackPanel Grid.Column="1" Margin="5">
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="releaseYearValue" Text="{Binding Path=ReleaseYear}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="countryValue" Text="{Binding Path=Country}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="genreValue" Text="{Binding Path=Genres}"/>
+                                        <ListBox Style="{StaticResource FilmAuthorListBox}" Name="genreValue" ItemsSource="{Binding Path=Genres}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Style="{StaticResource FilmFieldValue}" Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
                                         <ListBox Style="{StaticResource FilmAuthorListBox}" Name="directorValue" ItemsSource="{Binding Path=Directors}">
                                             <ListBox.ItemTemplate>
                                                 <DataTemplate>
@@ -112,9 +116,15 @@
                                                 </DataTemplate>
                                             </ListBox.ItemTemplate>
                                         </ListBox>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValue" Text="{Binding Path=Budget}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="ageLimitValue" Text="{Binding Path=AgeLimit}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="durationValue" Text="{Binding Path=Duration}"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValue" Text="{Binding Path=BudgetInDollars}"/>
+                                            <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValueSign" Padding="0 10px" Text="$"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource FilmFieldValue}" Name="ageLimitValue" Text="{Binding Path=AgeLimit}"/>
+                                            <TextBlock Style="{StaticResource FilmFieldValue}" Name="ageLimitValueSign" Padding="0 10px" Text="+"/>
+                                        </StackPanel>
+                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="durationValue" Text="{Binding Path=Duration, StringFormat=HH:mm:ss}"/>
                                     </StackPanel>
                                 </Grid>
                             </Grid>
@@ -137,15 +147,17 @@
                                 <Setter TargetName="composerKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="composerValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Budget}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding BudgetInDollars}" Value="0">
                                 <Setter TargetName="budgetKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="budgetValue" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="budgetValueSign" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding AgeLimit}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding AgeLimit}" Value="0">
                                 <Setter TargetName="ageLimitKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="ageLimitValue" Property="Visibility" Value="Collapsed" />
+                                <Setter TargetName="ageLimitValueSign" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Duration}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding Duration}" Value="00:00:00">
                                 <Setter TargetName="durationKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="durationValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>

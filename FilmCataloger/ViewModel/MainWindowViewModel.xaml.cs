@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
-using FilmCataloger.Adapter;
-using FilmCataloger.Service;
 
 namespace FilmCataloger.ViewModel
 {
@@ -23,12 +22,38 @@ namespace FilmCataloger.ViewModel
                 "United Kindom",
                 new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
                 new List<string>(new string[] {"Хлоя Чжао"}),
-                null,
+                new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
                 new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
                 new List<string>(new string[] {"Рамин Джавади"}),
                 350000000,
+                20,
+                new DateTime(2015, 7, 20, 3, 3, 25),
+                "C:/img/eternals.png"));
+            _filmCollection.Add(new Film(
+                "Вечные",
+                2020,
+                "United Kindom",
+                new List<Genre>(new[] {Genre.Action, Genre.Mystery, Genre.Romance}),
+                new List<string>(new string[] {"Хлоя Чжао"}),
+                null,
+                null,
+                new List<string>(new string[] {"Рамин Джавади"}),
+                350000000,
                 0,
-                16594,
+                new DateTime(2015, 7, 20, 0, 0, 0),
+                "C:/img/eternals.png"));
+            _filmCollection.Add(new Film(
+                "Вечные",
+                2020,
+                "United Kindom",
+                new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
+                null,
+                null,
+                new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
+                new List<string>(new string[] {"Рамин Джавади"}),
+                0,
+                10,
+                new DateTime(2015, 7, 20, 10, 50, 5),
                 "C:/img/eternals.png"));
             _filmCollection.Add(new Film(
                 "Вечные",
@@ -36,38 +61,12 @@ namespace FilmCataloger.ViewModel
                 "United Kindom",
                 new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
                 new List<string>(new string[] {"Хлоя Чжао"}),
-                null,
-                new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
                 new List<string>(new string[] {"Рамин Джавади"}),
+                new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
+                null,
                 350000000,
                 0,
-                16594,
-                "C:/img/eternals.png"));
-            _filmCollection.Add(new Film(
-                "Вечные",
-                2020,
-                "United Kindom",
-                new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
-                new List<string>(new string[] {"Хлоя Чжао"}),
-                null,
-                new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                new List<string>(new string[] {"Рамин Джавади"}),
-                350000000,
-                0,
-                16594,
-                "C:/img/eternals.png"));
-            _filmCollection.Add(new Film(
-                "Вечные",
-                2020,
-                "United Kindom",
-                new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
-                new List<string>(new string[] {"Хлоя Чжао"}),
-                null,
-                new List<string>(new string[] {"Виктория Алонсо, Митчелл Белл, Луис Д’Эспозито"}),
-                new List<string>(new string[] {"Рамин Джавади"}),
-                350000000,
-                0,
-                16594,
+                new DateTime(),
                 "C:/img/eternals.png"));
             
             FilmListBox.ItemsSource = _filmCollection;
