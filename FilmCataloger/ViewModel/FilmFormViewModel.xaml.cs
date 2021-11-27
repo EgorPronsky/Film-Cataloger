@@ -4,6 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
+using FilmCataloger.View;
 
 namespace FilmCataloger.ViewModel
 {
@@ -26,8 +27,12 @@ namespace FilmCataloger.ViewModel
 
         private void SaveFilmButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (GetInvalidFields().Count > 0)
+            List<string> invalidFields = GetInvalidFields();
+            if (invalidFields.Count > 0)
             {
+                NotificationWindow notificationWindow = new NotificationWindow();
+                notificationWindow.Message.Text = "Next field are invalid:\n\t" + String.Join(",\n\t", invalidFields);
+                notificationWindow.ShowDialog();
                 return;
             }
 
