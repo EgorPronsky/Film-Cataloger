@@ -89,9 +89,8 @@
         
         <Style x:Key="FilmFormFieldTextBox">
             <Setter Property="TextBox.FontFamily" Value="Resources/Fonts/#Manrope" />
-            <Setter Property="TextBox.FontSize" Value="26px" />
+            <Setter Property="TextBox.FontSize" Value="22px" />
             <Setter Property="TextBox.VerticalAlignment" Value="Center" />
-            <Setter Property="TextBox.Margin" Value="5px 0 0 0" />
         </Style>
         
         <Style x:Key="FilmFormCheckbox">
@@ -133,6 +132,34 @@
                             <GradientStop Color="#ab51c3" Offset="1" />
                         </LinearGradientBrush.GradientStops>
                     </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style x:Key="FilmAuthorListBox">
+            <Setter Property="ListBox.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ItemsPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>

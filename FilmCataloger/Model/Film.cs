@@ -4,8 +4,7 @@ namespace FilmCataloger.Model
 {
     public class Film
     {
-        private static long _filmCounter = 0;
-        
+        private static long _filmCounter;
         private readonly long _id;
     
         private string _name;

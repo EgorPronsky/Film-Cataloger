@@ -22,7 +22,7 @@
                 </Button>
             </StackPanel>
             
-            <ListBox HorizontalContentAlignment="Stretch" Grid.Column="0" x:Name="FilmList" Margin="20px 10px 0px 10px" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListBox Grid.Column="0" x:Name="FilmListBox" Margin="20px 10px 0px 10px" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="5">
@@ -59,6 +59,8 @@
                                 
                                 <TextBlock Style="{StaticResource FilmName}" Text="{Binding Path=Name}"/>
                                 
+                                
+                                
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -82,10 +84,34 @@
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="releaseYearValue" Text="{Binding Path=ReleaseYear}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="countryValue" Text="{Binding Path=Country}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="genreValue" Text="{Binding Path=Genres}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="directorValue" Text="{Binding Path=Directors}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="writerValue" Text="{Binding Path=Writers}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="producerValue" Text="{Binding Path=Producers}"/>
-                                        <TextBlock Style="{StaticResource FilmFieldValue}" Name="composerValue" Text="{Binding Path=Composers}"/>
+                                        <ListBox Style="{StaticResource FilmAuthorListBox}" Name="directorValue" ItemsSource="{Binding Path=Directors}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Style="{StaticResource FilmFieldValue}" Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <ListBox Style="{StaticResource FilmAuthorListBox}" Name="writerValue" ItemsSource="{Binding Path=Writers}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Style="{StaticResource FilmFieldValue}" Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <ListBox Style="{StaticResource FilmAuthorListBox}" Name="producerValue" ItemsSource="{Binding Path=Producers}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Style="{StaticResource FilmFieldValue}" Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
+                                        <ListBox Style="{StaticResource FilmAuthorListBox}" Name="composerValue" ItemsSource="{Binding Path=Composers}">
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Style="{StaticResource FilmFieldValue}" Text="{Binding}"/>
+                                                </DataTemplate>
+                                            </ListBox.ItemTemplate>
+                                        </ListBox>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="budgetValue" Text="{Binding Path=Budget}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="ageLimitValue" Text="{Binding Path=AgeLimit}"/>
                                         <TextBlock Style="{StaticResource FilmFieldValue}" Name="durationValue" Text="{Binding Path=Duration}"/>

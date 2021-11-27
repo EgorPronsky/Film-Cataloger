@@ -29,11 +29,6 @@ namespace FilmCataloger.Adapter
             AdaptToView(film);
         }
 
-        public Film AdaptToModel()
-        {
-            throw new NotImplementedException();
-        }
-
         private void AdaptToView(Film film)
         {
             Id = film.Id;
@@ -55,6 +50,11 @@ namespace FilmCataloger.Adapter
                 .ToString(@"hh\:mm\:ss") : null;
 
             PosterImagePath = film.PosterImagePath;
+        }
+        
+        public Film AdaptToModel()
+        {
+            throw new NotImplementedException();
         }
         
         public class DefaultComparer : IComparer<FilmToViewAdapter>
