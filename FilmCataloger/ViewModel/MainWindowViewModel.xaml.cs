@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
+using FilmCataloger.Service;
 
 namespace FilmCataloger.ViewModel
 {
@@ -16,7 +16,7 @@ namespace FilmCataloger.ViewModel
         {
             InitializeComponent();
             
-            _filmCollection.Add(new Film(
+            /*_filmCollection.Add(new Film(
                 "Вечные",
                 2020,
                 "United Kindom",
@@ -67,9 +67,14 @@ namespace FilmCataloger.ViewModel
                 350000000,
                 0,
                 new DateTime(),
-                "C:/img/eternals.png"));
+                "C:/img/eternals.png"));*/
             
             FilmListBox.ItemsSource = _filmCollection;
+        }
+
+        public static void AddFilm(Film film)
+        {
+            FilmCollectionService.AddSorted(_filmCollection, film, new Film.DefaultComparer());
         }
 
         private void AddFilmButton_OnClick(object sender, RoutedEventArgs e)
@@ -85,8 +90,8 @@ namespace FilmCataloger.ViewModel
         
         private void RemoveFilmButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var filmId = ((Button)sender).Tag;
-            _filmCollection.Remove(_filmCollection.Single(film => filmId.Equals(film.Id)));
+            ulong filmId = (ulong)((Button)sender).Tag;
+            _filmCollection.Remove(FilmCollectionService.FindById(_filmCollection, filmId));
         }
         
     }

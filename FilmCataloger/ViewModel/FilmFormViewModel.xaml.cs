@@ -28,6 +28,7 @@ namespace FilmCataloger.ViewModel
         private void SaveFilmButton_OnClick(object sender, RoutedEventArgs e)
         {
             List<string> invalidFields = GetInvalidFields();
+            
             if (invalidFields.Count > 0)
             {
                 NotificationWindow notificationWindow = new NotificationWindow();
@@ -36,46 +37,38 @@ namespace FilmCataloger.ViewModel
                 return;
             }
 
-        }
-        
-        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
-        {
+            Film film = new Film();
+            
+            film.Name = Name.Text;
+            film.Country = Country.Text;
+            film.ReleaseYear = UInt16.Parse(ReleaseYear.Text);
+            film.Genres = GetGenres();
+
+            List<string> directors = GetAuthors(Director);
+            List<string> writers = GetAuthors(Writer);
+            List<string> producers = GetAuthors(Producer);
+            List<string> composers = GetAuthors(Composer);
+
+            if (directors.Count != 0) film.Directors = directors;
+            if (writers.Count != 0) film.Writers = writers;
+            if (producers.Count != 0) film.Producers = producers;
+            if (composers.Count != 0) film.Composers = composers;
+
+            if (AgeLimit.Text != "") film.AgeLimit = Byte.Parse(AgeLimit.Text);
+            if (Budget.Text != "") film.BudgetInDollars = UInt64.Parse(Budget.Text);
+
+            DateTime duration = new DateTime();
+            if (DurationHours.Text != "") duration = duration.AddHours(Byte.Parse(DurationHours.Text));
+            if (DurationMinutes.Text != "") duration = duration.AddMinutes(Byte.Parse(DurationMinutes.Text));
+            if (DurationHours.Text != "") duration = duration.AddSeconds(Byte.Parse(DurationSeconds.Text));
+            film.Duration = duration;
+
+            film.ImagePath = ImagePath.Text;
+            
+            MainWindowViewModel.AddFilm(film);
             ContentControl.Content = new MainWindowViewModel();
         }
-
-        private void AddDirectorTextBox(object sender, RoutedEventArgs e)
-        {
-            Directors.Children.Add(GetConfiguredTextBox());
-        }
         
-        private void AddWriterTextBox(object sender, RoutedEventArgs e)
-        {
-            Writers.Children.Add(GetConfiguredTextBox());
-        }
-        
-        private void AddProducerTextBox(object sender, RoutedEventArgs e)
-        {
-            Producers.Children.Add(GetConfiguredTextBox());
-        }
-        
-        private void AddComposerTextBox(object sender, RoutedEventArgs e)
-        {
-            Composers.Children.Add(GetConfiguredTextBox());
-        }
-
-        private TextBox GetConfiguredTextBox()
-        {
-            TextBox textBox = new TextBox();
-            
-            textBox.Width = 500;
-            textBox.Height = 35;
-            textBox.HorizontalAlignment = HorizontalAlignment.Left;
-            textBox.Margin = new Thickness(0, 5, 0, 0);
-            textBox.Style = FindResource("FilmFormFieldTextBox") as Style;
-
-            return textBox;
-        }
-
         private List<string> GetInvalidFields()
         {
             List<string> invalidFields = new List<string>();
@@ -152,5 +145,42 @@ namespace FilmCataloger.ViewModel
             return result;
         }
         
+        private void CancelButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            ContentControl.Content = new MainWindowViewModel();
+        }
+
+        private void AddDirectorTextBox(object sender, RoutedEventArgs e)
+        {
+            Directors.Children.Add(GetConfiguredTextBox());
+        }
+        
+        private void AddWriterTextBox(object sender, RoutedEventArgs e)
+        {
+            Writers.Children.Add(GetConfiguredTextBox());
+        }
+        
+        private void AddProducerTextBox(object sender, RoutedEventArgs e)
+        {
+            Producers.Children.Add(GetConfiguredTextBox());
+        }
+        
+        private void AddComposerTextBox(object sender, RoutedEventArgs e)
+        {
+            Composers.Children.Add(GetConfiguredTextBox());
+        }
+
+        private TextBox GetConfiguredTextBox()
+        {
+            TextBox textBox = new TextBox();
+            
+            textBox.Width = 500;
+            textBox.Height = 35;
+            textBox.HorizontalAlignment = HorizontalAlignment.Left;
+            textBox.Margin = new Thickness(0, 5, 0, 0);
+            textBox.Style = FindResource("FilmFormFieldTextBox") as Style;
+
+            return textBox;
+        }
     }
 }

@@ -5,8 +5,8 @@ namespace FilmCataloger.Model
 {
     public class Film
     {
-        private static long _filmCounter;
-        private readonly long _id;
+        private static ulong _filmCounter;
+        private readonly ulong _id;
     
         private string _name;
         private ushort _releaseYear;
@@ -22,7 +22,12 @@ namespace FilmCataloger.Model
         private byte _ageLimit;
         private DateTime _duration;
 
-        private string _posterImagePath;
+        private string _imagePath;
+
+        public Film()
+        {
+            _id = ++_filmCounter;
+        }
 
         public Film(string name, 
             ushort releaseYear, 
@@ -35,7 +40,7 @@ namespace FilmCataloger.Model
             ulong budgetInDollars, 
             byte ageLimit, 
             DateTime duration,
-            string posterImagePath)
+            string imagePath)
         {
             _id = ++_filmCounter;
             Name = name;
@@ -49,10 +54,36 @@ namespace FilmCataloger.Model
             BudgetInDollars = budgetInDollars;
             AgeLimit = ageLimit;
             Duration = duration;
-            PosterImagePath = posterImagePath;
+            ImagePath = imagePath;
+        }
+        
+        public class DefaultComparer : IComparer<Film>
+        {
+            public int Compare(Film f1, Film f2)
+            {
+                int result = String.Compare(f1.Name, f2.Name, StringComparison.Ordinal);
+                if (result == 0)
+                    result = -(f1.ReleaseYear - f2.ReleaseYear);
+                return result;
+            }
+        }
+        
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(this.Id);
+        }
+        
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Film);
         }
 
-        public long Id
+        private bool Equals(Film film)
+        {
+            return film != null && this.Id == film.Id;
+        }
+
+        public ulong Id
         {
             get => _id;
         }
@@ -123,10 +154,10 @@ namespace FilmCataloger.Model
             set => _duration = value;
         }
         
-        public string PosterImagePath
+        public string ImagePath
         {
-            get => _posterImagePath;
-            set => _posterImagePath = value;
+            get => _imagePath;
+            set => _imagePath = value;
         }
     }
 }
