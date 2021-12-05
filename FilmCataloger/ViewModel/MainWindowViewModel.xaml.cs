@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
+using FilmCataloger.Service;
 
 namespace FilmCataloger.ViewModel
 {
@@ -96,6 +97,28 @@ namespace FilmCataloger.ViewModel
             sortedFilms.Sort(comparer);
             for (int i = 0; i < sortedFilms.Count; i++)
                 _filmCollection.Move(_filmCollection.IndexOf(sortedFilms[i]), i);
+        }
+
+        public static void ShowSearchResults(HashSet<string> keyWords)
+        {
+            FilmListBox.ItemsSource = FilmSearchService.FindByKeyWords(_filmCollection, keyWords);
+            List<Film> resultFilmList = new List<Film>();
+            foreach (var film in _filmCollection)
+            {
+                if (keyWords.Contains(film.Name)) {resultFilmList.Add(film); continue;}
+                if (keyWords.Contains(film.Country)) {resultFilmList.Add(film); continue;}
+                if (keyWords.Contains(film.Genres.ToString())) {resultFilmList.Add(film); continue;}
+                if (keyWords.Contains(film.Name)) {resultFilmList.Add(film); continue;}
+                if (keyWords.Contains(film.Name)) {resultFilmList.Add(film); continue;}
+                if (keyWords.Contains(film.Name)) {resultFilmList.Add(film); continue;}
+                if (keyWords.Contains(film.Name)) {resultFilmList.Add(film); continue;}
+            }
+        }
+
+        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchWindowViewModel searchWindow = new SearchWindowViewModel();
+            searchWindow.ShowDialog();
         }
 
         private void AddFilmButton_OnClick(object sender, RoutedEventArgs e)
