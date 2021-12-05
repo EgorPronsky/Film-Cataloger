@@ -131,19 +131,19 @@
                         </Grid>
                         
                         <DataTemplate.Triggers>
-                            <DataTrigger Binding="{Binding Directors}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding Directors.Count}" Value="0">
                                 <Setter TargetName="directorKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="directorValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Writers}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding Writers.Count}" Value="0">
                                 <Setter TargetName="writerKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="writerValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Producers}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding Producers.Count}" Value="0">
                                 <Setter TargetName="producerKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="producerValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding Composers}" Value="{x:Null}">
+                            <DataTrigger Binding="{Binding Composers.Count}" Value="0">
                                 <Setter TargetName="composerKey" Property="Visibility" Value="Collapsed" />
                                 <Setter TargetName="composerValue" Property="Visibility" Value="Collapsed" />
                             </DataTrigger>

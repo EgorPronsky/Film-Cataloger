@@ -88,7 +88,7 @@
                         <TextBlock Style="{StaticResource FilmFormFieldLabel}">Directors</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel x:Name="Directors">
-                                <TextBox Width="500" Height="35" Margin="0 0 10px 0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
+                                <TextBox x:Name="FirstDirector" Width="500" Height="35" Margin="0 0 10px 0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
                             </StackPanel>
                             <Button Height="30px" Width="30px" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" Click="AddDirectorTextBox">
                                 <Button.Template>
@@ -104,7 +104,7 @@
                         <TextBlock Style="{StaticResource FilmFormFieldLabel}">Writers</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel x:Name="Writers">
-                                <TextBox Width="500" Height="35" Margin="0 0 10px 0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
+                                <TextBox x:Name="FirstWriter" Width="500" Height="35" Margin="0 0 10px 0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
                             </StackPanel>
                             <Button Height="30px" Width="30px" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" Click="AddWriterTextBox">
                                 <Button.Template>
@@ -120,7 +120,7 @@
                         <TextBlock Style="{StaticResource FilmFormFieldLabel}">Producers</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel x:Name="Producers">
-                                <TextBox Width="500" Height="35" Margin="0 0 10px 0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
+                                <TextBox x:Name="FirstProducer" Width="500" Height="35" Margin="0 0 10px 0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
                             </StackPanel>
                             <Button Height="30px" Width="30px" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" Click="AddProducerTextBox">
                                 <Button.Template>
@@ -136,7 +136,7 @@
                         <TextBlock Style="{StaticResource FilmFormFieldLabel}">Composers</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <StackPanel x:Name="Composers">
-                                <TextBox Width="500" Height="35" Margin="0 0 10px  0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
+                                <TextBox x:Name="FirstComposer" Width="500" Height="35" Margin="0 0 10px  0" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
                             </StackPanel>
                             <Button Height="30px" Width="30px" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" Click="AddComposerTextBox">
                                 <Button.Template>

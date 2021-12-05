@@ -14,15 +14,19 @@ namespace FilmCataloger.ViewModel
         private const string Writer = "Writer";
         private const string Producer = "Producer";
         private const string Composer = "Composer";
+
+        private ulong _currentFilmId;
         
         public FilmFormViewModel()
         {
             InitializeComponent();
         }
         
-        public FilmFormViewModel(long filmId)
+        public FilmFormViewModel(ulong filmId)
         {
             InitializeComponent();
+            _currentFilmId = filmId;
+            PrefillFormFields(MainWindowViewModel.GetFilm(_currentFilmId));
         }
 
         private void SaveFilmButton_OnClick(object sender, RoutedEventArgs e)
@@ -44,15 +48,10 @@ namespace FilmCataloger.ViewModel
             film.ReleaseYear = UInt16.Parse(ReleaseYear.Text);
             film.Genres = GetGenres();
 
-            List<string> directors = GetAuthors(Director);
-            List<string> writers = GetAuthors(Writer);
-            List<string> producers = GetAuthors(Producer);
-            List<string> composers = GetAuthors(Composer);
-
-            if (directors.Count != 0) film.Directors = directors;
-            if (writers.Count != 0) film.Writers = writers;
-            if (producers.Count != 0) film.Producers = producers;
-            if (composers.Count != 0) film.Composers = composers;
+            film.Directors = GetAuthors(Director);
+            film.Writers = GetAuthors(Writer);
+            film.Producers = GetAuthors(Producer);
+            film.Composers = GetAuthors(Composer);
 
             if (AgeLimit.Text != "") film.AgeLimit = Byte.Parse(AgeLimit.Text);
             if (Budget.Text != "") film.BudgetInDollars = UInt64.Parse(Budget.Text);
@@ -60,12 +59,20 @@ namespace FilmCataloger.ViewModel
             DateTime duration = new DateTime();
             if (DurationHours.Text != "") duration = duration.AddHours(Byte.Parse(DurationHours.Text));
             if (DurationMinutes.Text != "") duration = duration.AddMinutes(Byte.Parse(DurationMinutes.Text));
-            if (DurationHours.Text != "") duration = duration.AddSeconds(Byte.Parse(DurationSeconds.Text));
+            if (DurationSeconds.Text != "") duration = duration.AddSeconds(Byte.Parse(DurationSeconds.Text));
             film.Duration = duration;
 
             film.ImagePath = ImagePath.Text;
             
-            MainWindowViewModel.AddFilm(film);
+            if (_currentFilmId != 0)
+            {
+                MainWindowViewModel.EditFilm(film, _currentFilmId);
+            }
+            else
+            {
+                MainWindowViewModel.AddFilm(film);
+            }
+            
             ContentControl.Content = new MainWindowViewModel();
         }
         
@@ -84,8 +91,45 @@ namespace FilmCataloger.ViewModel
             if (DurationHours.Text != "" && !Byte.TryParse(DurationHours.Text, out byte hours)) invalidFields.Add("Duration (hours)");
             if (DurationMinutes.Text != "" && !Byte.TryParse(DurationMinutes.Text, out byte minutes)) invalidFields.Add("Duration (minutes)");
             if (DurationSeconds.Text != "" && !Byte.TryParse(DurationSeconds.Text, out byte seconds)) invalidFields.Add("Duration (seconds)");
+
+            if (ImagePath.Text != "" && !File.Exists(ImagePath.Text))
+            {
+                invalidFields.Add("Image path");
+            }
             
             return invalidFields;
+        }
+        
+         private void PrefillFormFields(Film film)
+        {
+            Name.Text = film.Name;
+            Country.Text = film.Country;
+            ReleaseYear.Text = film.ReleaseYear.ToString();
+
+            if (film.Genres.Contains(Genre.Action)) Action.IsChecked = true;
+            if (film.Genres.Contains(Genre.Comedy)) Comedy.IsChecked = true;
+            if (film.Genres.Contains(Genre.Drama)) Drama.IsChecked = true;
+            if (film.Genres.Contains(Genre.Fantasy)) Fantasy.IsChecked = true;
+            if (film.Genres.Contains(Genre.Horror)) Horror.IsChecked = true;
+            if (film.Genres.Contains(Genre.Mystery)) Mystery.IsChecked = true;
+            if (film.Genres.Contains(Genre.Romance)) Romance.IsChecked = true;
+            if (film.Genres.Contains(Genre.Thriller)) Thriller.IsChecked = true;
+
+            if (film.BudgetInDollars != 0) Budget.Text = film.BudgetInDollars.ToString();
+            if (film.AgeLimit != 0) AgeLimit.Text = film.AgeLimit.ToString();
+            if (!film.Duration.Equals(DateTime.MinValue))
+            {
+                DurationHours.Text = film.Duration.Hour.ToString();
+                DurationMinutes.Text = film.Duration.Minute.ToString();
+                DurationSeconds.Text = film.Duration.Second.ToString();
+            }
+
+            if (film.ImagePath != null) ImagePath.Text = film.ImagePath;
+
+            if (film.Directors != null && film.Directors.Count != 0) PrefillAuthors(film.Directors, Director);
+            if (film.Writers != null && film.Writers.Count != 0) PrefillAuthors(film.Writers, Writer);
+            if (film.Producers != null && film.Producers.Count != 0) PrefillAuthors(film.Producers, Producer);
+            if (film.Composers != null && film.Composers.Count != 0) PrefillAuthors(film.Composers, Composer);
         }
 
         private List<Genre> GetGenres()
@@ -145,6 +189,46 @@ namespace FilmCataloger.ViewModel
             return result;
         }
         
+        private void PrefillAuthors(List<string> authors, string type)
+        {
+            UIElementCollection authorsFieldChildren;
+            switch(type)
+            {
+                case Director:
+                {
+                    FirstDirector.Text = authors[0];
+                    authorsFieldChildren = Directors.Children;
+                    break;
+                }
+                case Writer:
+                {
+                    FirstWriter.Text = authors[0];
+                    authorsFieldChildren = Writers.Children;
+                    break;
+                }
+                case Producer:
+                {
+                    FirstProducer.Text = authors[0];
+                    authorsFieldChildren = Producers.Children;
+                    break;
+                }
+                case Composer:
+                {
+                    FirstComposer.Text = authors[0];
+                    authorsFieldChildren = Composers.Children;
+                    break;
+                }
+                default:
+                {
+                    throw new InvalidDataException("Invalid author type");
+                }
+            }
+            for(int i = 1; i < authors.Count; i++)
+            {
+                authorsFieldChildren.Add(GetConfiguredTextBox(authors[i]));
+            }
+        }
+        
         private void CancelButton_OnClick(object sender, RoutedEventArgs e)
         {
             ContentControl.Content = new MainWindowViewModel();
@@ -179,7 +263,14 @@ namespace FilmCataloger.ViewModel
             textBox.HorizontalAlignment = HorizontalAlignment.Left;
             textBox.Margin = new Thickness(0, 5, 0, 0);
             textBox.Style = FindResource("FilmFormFieldTextBox") as Style;
-
+            
+            return textBox;
+        }
+        
+        private TextBox GetConfiguredTextBox(string text)
+        {
+            TextBox textBox = GetConfiguredTextBox();
+            textBox.Text = text;
             return textBox;
         }
     }
