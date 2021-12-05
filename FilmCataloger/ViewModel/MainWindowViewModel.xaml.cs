@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
-using FilmCataloger.Service;
 
 namespace FilmCataloger.ViewModel
 {
@@ -32,7 +31,7 @@ namespace FilmCataloger.ViewModel
                     new DateTime(2015, 7, 20, 3, 3, 25),
                     "C:/img/eternals.png"));
                 _filmCollection.Add(new Film(
-                    "Вечные",
+                    "Аечные",
                     2020,
                     "United Kindom",
                     new List<Genre>(new[] {Genre.Action, Genre.Mystery, Genre.Romance}),
@@ -45,7 +44,7 @@ namespace FilmCataloger.ViewModel
                     new DateTime(2015, 7, 20, 0, 10, 0),
                     "C:/img/eternals.png"));
                 _filmCollection.Add(new Film(
-                    "Вечные",
+                    "Бечные",
                     2020,
                     "United Kindom",
                     new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
@@ -58,7 +57,7 @@ namespace FilmCataloger.ViewModel
                     new DateTime(2015, 7, 20, 10, 50, 5),
                     "C:/img/eternals.png"));
                 _filmCollection.Add(new Film(
-                    "Вечные",
+                    "Фечные",
                     2020,
                     "United Kindom",
                     new List<Genre>(new[] {Genre.Action, Genre.Mystery}),
@@ -91,9 +90,23 @@ namespace FilmCataloger.ViewModel
             return _filmCollection.Single(film => filmId.Equals(film.Id));
         }
 
+        public static void SortFilms(IComparer<Film> comparer)
+        {
+            List<Film> sortedFilms = new List<Film>(_filmCollection);
+            sortedFilms.Sort(comparer);
+            for (int i = 0; i < sortedFilms.Count; i++)
+                _filmCollection.Move(_filmCollection.IndexOf(sortedFilms[i]), i);
+        }
+
         private void AddFilmButton_OnClick(object sender, RoutedEventArgs e)
         {
             ContentControl.Content = new FilmFormViewModel();
+        }
+        
+        private void SortFilmsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            SortWindowViewModel sortWindow = new SortWindowViewModel();
+            sortWindow.ShowDialog();
         }
         
         private void EditFilmButton_OnClick(object sender, RoutedEventArgs e)
@@ -105,7 +118,7 @@ namespace FilmCataloger.ViewModel
         private void RemoveFilmButton_OnClick(object sender, RoutedEventArgs e)
         {
             ulong filmId = (ulong)((Button)sender).Tag;
-            _filmCollection.Remove(FilmCollectionService.FindById(_filmCollection, filmId));
+            _filmCollection.Remove(GetFilm(filmId));
         }
         
     }

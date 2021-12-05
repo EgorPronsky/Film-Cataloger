@@ -1,0 +1,22 @@
+﻿<Window x:Class="FilmCataloger.ViewModel.SortWindowViewModel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="Sort" Height="200" Width="350">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="24px" Text="Sort by:"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton x:Name="ByName" Margin="5px 0" FontSize="14px" Content="Name" IsChecked="True" />
+            <RadioButton x:Name="ByReleaseYear" Margin="5px 0" FontSize="14px" Content="Release year" />
+            <RadioButton x:Name="ByGenres" Margin="5px 0" FontSize="14px" Content="Genres" />
+        </StackPanel>
+        <Button Grid.Row="2" Click="OkButton_OnClick">OK</Button>
+    </Grid>
+</Window>

@@ -32,6 +32,14 @@
       <Resource Include="Resources\Images\Edit.png">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Resource>
+      <None Remove="Resources\Images\Search.png" />
+      <Resource Include="Resources\Images\Search.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+      <None Remove="Resources\Images\Sort.png" />
+      <Resource Include="Resources\Images\Sort.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using FilmCataloger.Model;
-using FilmCataloger.View;
 
 namespace FilmCataloger.ViewModel
 {
@@ -15,7 +14,7 @@ namespace FilmCataloger.ViewModel
         private const string Producer = "Producer";
         private const string Composer = "Composer";
 
-        private ulong _currentFilmId;
+        private readonly ulong _currentFilmId;
         
         public FilmFormViewModel()
         {
@@ -35,7 +34,7 @@ namespace FilmCataloger.ViewModel
             
             if (invalidFields.Count > 0)
             {
-                NotificationWindow notificationWindow = new NotificationWindow();
+                InvalidFieldsWindowViewModel notificationWindow = new InvalidFieldsWindowViewModel();
                 notificationWindow.Message.Text = "Next field are invalid:\n\t" + String.Join(",\n\t", invalidFields);
                 notificationWindow.ShowDialog();
                 return;

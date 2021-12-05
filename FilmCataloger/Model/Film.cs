@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media.Media3D;
 
 namespace FilmCataloger.Model
 {
@@ -57,13 +58,35 @@ namespace FilmCataloger.Model
             ImagePath = imagePath;
         }
         
-        public class DefaultComparer : IComparer<Film>
+        public class NameComparer : IComparer<Film>
         {
             public int Compare(Film f1, Film f2)
             {
                 int result = String.Compare(f1.Name, f2.Name, StringComparison.Ordinal);
                 if (result == 0)
                     result = -(f1.ReleaseYear - f2.ReleaseYear);
+                return result;
+            }
+        }
+        
+        public class ReleaseYearComparer : IComparer<Film>
+        {
+            public int Compare(Film f1, Film f2)
+            {
+                int result = -(f1.ReleaseYear - f2.ReleaseYear);
+                if (result == 0)
+                    result = String.Compare(f1.Name, f2.Name, StringComparison.Ordinal);
+                return result;
+            }
+        }
+        
+        public class GenresComparer : IComparer<Film>
+        {
+            public int Compare(Film f1, Film f2)
+            {
+                int result = f1.Genres[0].CompareTo(f2.Genres[0]);
+                if (result == 0)
+                    result = f1.Genres.Count.CompareTo(f2.Genres.Count);
                 return result;
             }
         }

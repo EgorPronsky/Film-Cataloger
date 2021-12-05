@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 
-namespace FilmCataloger.View
+namespace FilmCataloger.ViewModel
 {
-    public partial class NotificationWindow : Window
+    public partial class InvalidFieldsWindowViewModel : Window
     {
-        public NotificationWindow()
+        public InvalidFieldsWindowViewModel()
         {
             InitializeComponent();
         }

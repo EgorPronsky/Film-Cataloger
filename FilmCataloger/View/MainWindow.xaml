@@ -13,10 +13,24 @@
             </Grid.ColumnDefinitions>
             
             <StackPanel Grid.Column="1" Margin="10px">
-                <Button Height="60px" Width="60px" HorizontalAlignment="Center" Cursor="Hand" Click="AddFilmButton_OnClick">
+                <Button Margin="0 0 0 10px" Height="60px" Width="60px" HorizontalAlignment="Center" Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="../Resources/Images/Search.png"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Margin="0 0 0 10px" Height="60px" Width="60px" HorizontalAlignment="Center" Cursor="Hand" Click="AddFilmButton_OnClick">
                     <Button.Template>
                         <ControlTemplate>
                             <Image Source="../Resources/Images/Add.png"/>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Margin="0 0 0 10px" Height="60px" Width="60px" HorizontalAlignment="Center" Cursor="Hand" Click="SortFilmsButton_OnClick">
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="../Resources/Images/Sort.png"/>
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
