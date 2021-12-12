@@ -74,7 +74,7 @@
             </StackPanel>
             
             <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FilmFormFieldContainer}">
-                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Image path</TextBlock>
+                <TextBlock Style="{StaticResource FilmFormFieldLabel}">Image path *</TextBlock>
                 <TextBox x:Name="ImagePath" Width="600px" Height="35px" Style="{StaticResource FilmFormFieldTextBox}"></TextBox>
             </StackPanel>
             

@@ -18,7 +18,8 @@ namespace FilmCataloger.ViewModel
             {
                 keyWordList.Add(((TextBox) keyWord).Text);
             }
-            MainWindowViewModel.ShowSearchResults(keyWordList);
+            MainWindowViewModel.SortBySearchKeyWords(keyWordList);
+            DialogResult = true;
         }
 
         private void AddKeyWordFieldButton_OnClick(object sender, RoutedEventArgs e)

@@ -22,6 +22,12 @@ namespace FilmCataloger.Service
                     resultFilmList.Add(film); 
                     continue;
                 }
+                
+                if (keyWords.Contains(film.ReleaseYear.ToString()))
+                {
+                    resultFilmList.Add(film); 
+                    continue;
+                }
 
                 bool wasFound = false;
                 foreach (var genre in film.Genres)

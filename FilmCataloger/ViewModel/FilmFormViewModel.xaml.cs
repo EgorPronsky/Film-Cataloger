@@ -91,7 +91,7 @@ namespace FilmCataloger.ViewModel
             if (DurationMinutes.Text != "" && !Byte.TryParse(DurationMinutes.Text, out byte minutes)) invalidFields.Add("Duration (minutes)");
             if (DurationSeconds.Text != "" && !Byte.TryParse(DurationSeconds.Text, out byte seconds)) invalidFields.Add("Duration (seconds)");
 
-            if (ImagePath.Text != "" && !File.Exists(ImagePath.Text))
+            if (!File.Exists(ImagePath.Text))
             {
                 invalidFields.Add("Image path");
             }
